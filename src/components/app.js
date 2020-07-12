@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import CourseLibary from './courseLibary';
 
 export default class App extends Component {
   render() {
-    return (
+    return  (
       <div className='app'>
-        <h1>DevCamp React Starter</h1>
-        <h2>React Redux</h2>
+        <h1>Course Libary</h1>
+        <CourseLibary/>
       </div>
     );
   }
