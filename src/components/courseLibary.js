@@ -1,6 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect,dispatch } from 'react-redux';
 import courses from '../reducers/courses';
+import {fetchCourses} from '../actions'
 
 class CourseLibary extends React.Component {
 
@@ -8,8 +9,15 @@ class CourseLibary extends React.Component {
         super(props)
 
         this.renderCourse=this.renderCourse.bind(this);
+    
     }
 
+    componentDidMount() {
+        this.props.fetchCourses()
+    }
+
+
+    
     renderCourse(course) {
         return (
         <li key={course.description} className="course">
@@ -33,8 +41,10 @@ class CourseLibary extends React.Component {
     render(){
         return (
             <ul>
+            {/* {alert(JSON.stringify())} */}
             {this.props.courses.map(this.renderCourse)}    
                
+
 
             </ul>
         )
@@ -49,4 +59,12 @@ function mapStateToProps(state) {
     return {courses: state.courses}
 }
 
-export default connect(mapStateToProps)(CourseLibary);
+function mapDispatchToProps(dispatch){
+   return{ 
+       fetchCourses:() => {
+        dispatch(fetchCourses())
+    }
+}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseLibary);
